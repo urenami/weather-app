@@ -20,9 +20,16 @@ function App() {
     };
 
     useEffect(() => {
-        
         handleSearch();
-    }, []); 
+    }, []);
+
+    const convertToFahrenheit = (celsius) => (celsius * 9/5) + 32;
+
+    const getDayOfWeek = (dateStr) => {
+        const date = new Date(dateStr);
+        const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        return daysOfWeek[date.getUTCDay()];
+    };
 
     return (
         <div className="App">
@@ -40,27 +47,32 @@ function App() {
                 <div className="current-weather">
                     <h2>Current Weather in {city}</h2>
                     <div>
-                        <p>Temperature: {currentWeather.temperature}°C</p>
+                        <p>Temperature: {convertToFahrenheit(currentWeather.temperature).toFixed(2)}°F</p>
                         <p>Humidity: {currentWeather.humidity}%</p>
                         <p>Description: {currentWeather.description}</p>
                     </div>
                 </div>
             )}
 
-            {/* 5-Day Forecast Section */}
+            {/* Weather Forecast Section */}
             {fiveDayForecast.length > 0 && (
                 <div className="five-day-forecast">
-                    <h2>5-Day Weather Forecast for {city}</h2>
+                    <h2>Weather Forecast for {city}</h2>
                     <div className="forecast-grid">
                         {fiveDayForecast.map((day, index) => (
                             <div key={index} className="forecast-day">
-                                <h3>Date: {day.date}</h3>
-                                {day.forecasts.map((forecast, idx) => (
-                                    <div key={idx} className="forecast-item">
-                                        <div className="forecast-time">Time: {forecast.time}</div>
-                                        <p>Temperature: {forecast.temperature}°C</p>
+                                <h3>Date: {new Date(day.date).toLocaleDateString('en-US', {
+                                        weekday: 'long',
+                                        year: 'numeric',
+                                        month: '2-digit',
+                                        day: '2-digit'
+                                    })}</h3>
+                                {day.forecasts.map((forecast, i) => (
+                                    <div key={i} className="forecast-item">
+                                        <p className="forecast-time">{forecast.time}</p>
+                                        <p>Temperature: {convertToFahrenheit(forecast.temperature).toFixed(2)}°F</p>
                                         <p>Humidity: {forecast.humidity}%</p>
-                                        <p className="forecast-description">Description: {forecast.description}</p>
+                                        <p className="forecast-description">{forecast.description}</p>
                                     </div>
                                 ))}
                             </div>
