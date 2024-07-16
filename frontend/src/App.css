@@ -1,17 +1,89 @@
 .App {
   text-align: center;
   font-family: Arial, sans-serif;
+  background-color: #e0f7fa; 
+  padding: 20px;
+  min-height: 100vh;
 }
 
-input {
+input, button {
   padding: 10px;
   margin: 10px;
 }
 
 button {
   padding: 10px 20px;
+  background-color: #007bff; 
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-h2 {
+button:hover {
+  background-color: #0056b3; 
+}
+
+h1, h2, h3 {
   margin-top: 20px;
+  color: #333;
+}
+
+.current-weather, .five-day-forecast {
+  margin-top: 20px;
+  background-color: #ffffff; 
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.forecast-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.forecast-day {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  flex: 1 0 0;
+  max-width: calc(100% / 5 - 20px);
+  background-color: #f1f8e9; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.forecast-items {
+  margin-top: 10px;
+  text-align: left;
+  border-top: 1px solid #ddd;
+  padding-top: 10px;
+}
+
+.forecast-item {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+  background-color: #e3f2fd;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.forecast-item:last-child {
+  border-bottom: none;
+}
+
+.forecast-time {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #007bff; 
+}
+
+.forecast-description {
+  margin-top: 5px;
+  font-style: italic;
+  color: #555;
 }
